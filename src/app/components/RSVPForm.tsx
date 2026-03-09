@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-// URL de tu script de Google Apps
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyZf8PHxueoq_CsvIS7GBQwLLanY7r4PCeSOvAmf5JKvQIJbh-9GyikX6WHELA7pE5v-Q/exec';
+// URL de tu script de Google Apps - Usando variable de entorno para Vercel
+const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL || 'https://script.google.com/macros/s/AKfycbyZf8PHxueoq_CsvIS7GBQwLLanY7r4PCeSOvAmf5JKvQIJbh-9GyikX6WHELA7pE5v-Q/exec';
 
 export function RSVPForm() {
     const [submitted, setSubmitted] = useState(false);
