@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { Countdown } from './components/Countdown';
-import { RSVPForm } from './components/RSVPForm';
 import MusicPlayer from './components/MusicPlayer';
 import Calendar from './components/Calendar';
 
@@ -70,9 +69,6 @@ export default function Home() {
         </div>
 
         <div className="hero-content">
-          <span className="hero-crown" aria-hidden="true">👑</span>
-
-          <p className="hero-pre-title">Con todo el amor de su familia</p>
 
           <h1 className="hero-name">Julieta Rua David</h1>
 
@@ -85,9 +81,9 @@ export default function Home() {
           </div>
 
           <p className="hero-invitation-text">
-            Hay momentos que se guardan para siempre en el corazón.<br />
+            "Hay momentos que se guardan para siempre en el corazón.<br />
             Quiero compartir contigo esta noche repleta de ilusión,<br />
-            celebrando junto a ti mis XV años.
+            celebrando junto a ti mis XV años."
           </p>
 
           <div className="hero-music-player-wrapper">
@@ -133,7 +129,7 @@ export default function Home() {
         <div className="details-bg-image" aria-hidden="true" />
         <h2 className="section-title">Detalles del evento</h2>
         <p className="section-subtitle">
-          Nos llena de alegría compartir contigo este momento tan especial en la vida Julieta.
+          Me llena de alegría compartir contigo este momento tan especial.
         </p>
 
         <div className="details-grid">
@@ -181,7 +177,7 @@ export default function Home() {
               <strong>Formal / Etiqueta</strong><br /><br />
             </p>
             <div>
-              <p className="restricted-title">Reserva el color:</p>
+              <p className="restricted-title">Colores Reservados:</p>
               {/* Gama Verde */}
               <div className="gamma-group">
                 <span className="gamma-label">Gama Verde:</span>
@@ -263,8 +259,8 @@ export default function Home() {
             <h3 className="gift-card-title">Un presente del corazón</h3>
             <p className="gift-card-text">
               Tu compañía es mi regalo más preciado en esta noche de luz.
-              Si nace de tu corazón hacerme un detalle para acompañarme a seguir
-              cumpliendo mis sueños, será recibido con inmensa gratitud y alegría.
+              Si nace de tu corazón hacerme un detalle,
+              será recibido con inmensa gratitud y alegría.
             </p>
           </div>
         </div>
@@ -317,7 +313,27 @@ export default function Home() {
         </p>
 
         <div className="rsvp-card">
-          <RSVPForm />
+          <div className="whatsapp-buttons-container">
+            <a
+              href="https://wa.me/573000000000?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              <span className="whatsapp-icon">📱</span>
+              Confirmar con Papá
+            </a>
+
+            <a
+              href="https://wa.me/573000000000?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              <span className="whatsapp-icon">📱</span>
+              Confirmar con Mamá
+            </a>
+          </div>
         </div>
       </section>
 
