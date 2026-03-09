@@ -308,30 +308,30 @@ export default function Home() {
         <p className="section-label">Confirmación</p>
         <h2 className="section-title">¿Nos acompañas?</h2>
         <p className="section-subtitle">
-          Por favor confirma tu asistencia antes del{' '}
-          <strong style={{ color: 'var(--gold-light)' }}>08 de Mayo, 2026</strong>
+          Por favor confirma tu asistencia hasta el {' '}
+          <strong style={{ color: 'var(--gold-light)' }}>15 de Abril, 2026</strong>
         </p>
 
         <div className="rsvp-card">
           <div className="whatsapp-buttons-container">
             <a
-              href="https://wa.me/573000000000?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
+              href="https://wa.me/573136601947?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
             >
               <span className="whatsapp-icon">📱</span>
-              Confirmar con Papá
+              Confirmar con Virsuly
             </a>
 
             <a
-              href="https://wa.me/573000000000?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
+              href="https://wa.me/573218187458?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20de%20Julieta"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
             >
               <span className="whatsapp-icon">📱</span>
-              Confirmar con Mamá
+              Confirmar con Julieta
             </a>
           </div>
         </div>
