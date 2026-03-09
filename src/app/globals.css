@@ -1,26 +1,1387 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --rose-gold: #b76e79;
+  --rose-gold-light: #d4a0a8;
+  --blush: #f2c4ce;
+  --blush-light: #fce8ed;
+  --champagne: #f7e7d0;
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --ivory: #fdf8f0;
+  --dark: #2d1b2e;
+  --dark2: #4a1f3a;
+  --text-dark: #3d2340;
+  --text-medium: #6b4c6e;
+  --purple-soft: #8b5cf6;
+  --lilac: #c4b5fd;
+
+  /* Opciones de color para el nombre (Hero Name) */
+  --name-emerald-gold: linear-gradient(135deg, #163020 0%, #c9a84c 50%, #7AA175 100%);
+  --name-silver-lavender: linear-gradient(135deg, #A0A0A0 0%, #C4B5FD 50%, #E0AAFF 100%);
+  --name-wine-rose: linear-gradient(135deg, #58181F 0%, #b76e79 50%, #f2c4ce 100%);
+  --name-champagne-pearl: linear-gradient(135deg, #c9a84c 0%, #f7e7d0 50%, #ffffff 100%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--ivory);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatY {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+}
+
+@keyframes floatButterfly {
+  0% {
+    transform: translateY(0) translateX(0) rotate(-5deg) scaleX(1);
+  }
+
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(5deg) scaleX(1);
+  }
+
+  50% {
+    transform: translateY(-10px) translateX(20px) rotate(-3deg) scaleX(-1);
+  }
+
+  75% {
+    transform: translateY(-25px) translateX(5px) rotate(8deg) scaleX(-1);
+  }
+
+  100% {
+    transform: translateY(0) translateX(0) rotate(-5deg) scaleX(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+@keyframes countdownPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes butterflyFall {
+  0% {
+    transform: translateY(-100px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(60px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), 0 0 60px rgba(201, 168, 76, 0.2);
+  }
+}
+
+@keyframes wingFlap {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+
+  50% {
+    transform: scaleX(0.4);
+  }
+}
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Butterfly decorations ─── */
+.butterfly-deco {
+  position: absolute;
+  pointer-events: none;
+  font-size: 2rem;
+  z-index: 0;
+  opacity: 0.55;
+  animation: floatButterfly 8s ease-in-out infinite;
+}
+
+/* ─── Falling butterflies ─── */
+.butterflies-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.butterfly-fall {
+  position: absolute;
+  top: -80px;
+  font-size: 1.5rem;
+  animation: butterflyFall linear infinite;
+  opacity: 0;
+}
+
+/* ─── Wrapper ─── */
+.invitation-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 1 – HERO
+═══════════════════════════════════════════════════ */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  overflow: hidden;
+  background:
+    linear-gradient(170deg,
+      rgba(255, 240, 250, 0.97) 0%,
+      rgba(252, 232, 237, 0.95) 35%,
+      rgba(247, 231, 208, 0.93) 70%,
+      rgba(255, 240, 250, 0.97) 100%);
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/hero_butterflies.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1.5s ease-out;
+  max-width: 700px;
+}
+
+.hero-crown {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: floatY 3s ease-in-out infinite;
+  display: block;
+}
+
+.hero-pre-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--text-medium);
+  margin-bottom: 1rem;
+}
+
+.hero-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(4.5rem, 13vw, 9rem);
+  background: var(--name-emerald-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  text-shadow: none;
+  animation: floatY 5s ease-in-out infinite;
+  margin-bottom: 0.5rem;
+}
+
+.hero-fifteen {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  color: var(--text-dark);
+  margin: 0.25rem 0 1.5rem;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.hero-divider-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+.hero-divider-line.right {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+
+.hero-divider-butterfly {
+  font-size: 1.4rem;
+  color: var(--gold);
+  animation: wingFlap 1.2s ease-in-out infinite;
+}
+
+.hero-date-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-medium);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-invitation-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-style: italic;
+  color: var(--text-medium);
+  line-height: 1.9;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.hero-music-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(183, 110, 121, 0.1);
+  border: 1px solid rgba(183, 110, 121, 0.25);
+  border-radius: 50px;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--rose-gold);
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+
+.hero-music-icon {
+  font-size: 1.1rem;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-medium);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  animation: floatY 2s ease-in-out infinite;
+  z-index: 3;
+}
+
+.hero-scroll-hint svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 2 – MENSAJE PERSONAL
+   ═══════════════════════════════════════════════════ */
+.message-section {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 1.5rem;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.message-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/julieta-mensaje.jpg');
+  /* URL temporal de la imagen subida */
+  background-size: cover;
+  background-position: center 20%;
+  z-index: 0;
+}
+
+.message-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(252, 232, 237, 0.6) 50%,
+      rgba(255, 255, 255, 0.8) 100%);
+  z-index: 1;
+}
+
+.message-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 100%;
+}
+
+.message-butterfly-left {
+  position: absolute;
+  left: -10%;
+  top: 0;
+  font-size: 5rem;
+  opacity: 0.2;
+  animation: floatButterfly 10s ease-in-out infinite;
+}
+
+.message-butterfly-right {
+  position: absolute;
+  right: -10%;
+  bottom: 0;
+  transform: scaleX(-1);
+  font-size: 5rem;
+  opacity: 0.2;
+  animation: floatButterfly 12s ease-in-out infinite reverse;
+}
+
+.message-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--dark2);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.message-quote {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  color: var(--rose-gold);
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+.message-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-dark);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.message-signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--rose-gold);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+.message-butterflies-row {
+  margin: 2rem 0;
+  font-size: 2rem;
+  letter-spacing: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 3 – DATOS DEL EVENTO
+═══════════════════════════════════════════════════ */
+.details-section {
+  position: relative;
+  padding: 5rem 1.5rem;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.details-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/butterfly_border.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.07;
+  z-index: 0;
+}
+
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--rose-gold);
+  margin-bottom: 0.75rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  font-style: italic;
+  color: var(--text-medium);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 950px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(183, 110, 121, 0.1);
+  border: 1px solid rgba(183, 110, 121, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blush), var(--gold), var(--lilac));
+}
+
+.detail-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(183, 110, 121, 0.2);
+}
+
+.detail-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.detail-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.detail-card-text {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  line-height: 1.8;
+}
+
+.detail-card-text strong {
+  color: var(--rose-gold);
+  font-weight: 600;
+}
+
+.restricted-colors-note {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(183, 110, 121, 0.2);
+}
+
+.restricted-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.gamma-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.gamma-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-medium);
+  min-width: 65px;
+  text-align: right;
+}
+
+.gamma-circles {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Gama Verde */
+.green-1 {
+  background-color: #2D5A27;
+}
+
+.green-2 {
+  background-color: #4A7C44;
+}
+
+.green-3 {
+  background-color: #7AA175;
+}
+
+.green-4 {
+  background-color: #ABC4A6;
+}
+
+/* Gama Gris */
+.gray-1 {
+  background-color: #333333;
+}
+
+.gray-2 {
+  background-color: #666666;
+}
+
+.gray-3 {
+  background-color: #999999;
+}
+
+.gray-4 {
+  background-color: #CCCCCC;
+}
+
+.detail-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--rose-gold), var(--gold));
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.detail-map-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(183, 110, 121, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 4 – COUNTDOWN
+═══════════════════════════════════════════════════ */
+.countdown-section {
+  position: relative;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.countdown-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/butterfly_dark.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.countdown-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(45, 27, 46, 0.88) 0%, rgba(74, 31, 58, 0.85) 100%);
+  z-index: 1;
+}
+
+.countdown-section .section-label {
+  color: var(--gold-light);
+}
+
+.countdown-section .section-title {
+  color: #fff;
+}
+
+.countdown-grid {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  min-width: 80px;
+}
+
+.countdown-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  animation: countdownPulse 2s ease-in-out infinite;
+}
+
+.countdown-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.5rem;
+}
+
+.countdown-butterfly-divider {
+  margin: 2rem 0 0;
+  font-size: 2rem;
+  opacity: 0.4;
+  letter-spacing: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 5 – VERSÍCULO & RETRATO 
+   ═══════════════════════════════════════════════════ */
+.verse-photo-section {
+  position: relative;
+  background: #fff;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.verse-container {
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+
+.verse-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--rose-gold);
+  margin-bottom: 1.5rem;
+}
+
+.verse-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.verse-quote cite {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-top: 1.5rem;
+  font-style: normal;
+}
+
+
+/* Porta-retrato - Foto de Julieta */
+.portrait-outer-frame {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 18px;
+  background: white;
+  box-shadow: 0 15px 50px rgba(183, 110, 121, 0.25);
+  border-radius: 4px;
+  animation: fadeIn 2s ease-out;
+}
+
+.portrait-inner-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(183, 110, 121, 0.2);
+  padding: 10px;
+  background: #fdfdfd;
+}
+
+.portrait-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  filter: contrast(1.05) brightness(1.02);
+  transition: transform 0.8s ease;
+}
+
+.portrait-outer-frame:hover .portrait-image {
+  transform: scale(1.02);
+}
+
+.portrait-gold-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.top-left {
+  top: -10px;
+  left: -10px;
+}
+
+.bottom-right {
+  bottom: -10px;
+  right: -10px;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   SECTION 6 – PADRES & PADRINOS
+═══════════════════════════════════════════════════ */
+.family-section {
+  position: relative;
+  background: linear-gradient(160deg, var(--blush-light) 0%, var(--champagne) 60%, var(--blush-light) 100%);
+  padding: 5.5rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.family-butterflies-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-image: url('/butterfly_border.png');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.family-butterflies-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-image: url('/butterfly_border.png');
+  background-size: cover;
+  background-position: center bottom;
+  opacity: 0.3;
+  z-index: 0;
+  transform: scaleY(-1);
+}
+
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  position: relative;
+  z-index: 1;
+}
+
+.family-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(183, 110, 121, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 30px rgba(183, 110, 121, 0.1);
+  transition: transform 0.3s;
+}
+
+.family-card:hover {
+  transform: translateY(-5px);
+}
+
+.family-card-butterfly {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.family-card-role {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--rose-gold);
+  margin-bottom: 1rem;
+}
+
+.family-card-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.family-card-name span {
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: var(--text-medium);
+}
+
+/* Sugerencia de Regalos (Dual Cards) */
+.gifts-section {
+  padding: 4rem 1.5rem;
+  background: #fff;
+}
+
+.gifts-container {
+  display: flex;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gift-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(183, 110, 121, 0.15);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(183, 110, 121, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 650px;
+  width: 100%;
+}
+
+.gift-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 45px rgba(183, 110, 121, 0.2);
+}
+
+.gift-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
+  filter: drop-shadow(0 4px 8px rgba(183, 110, 121, 0.25));
+}
+
+.gift-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose-gold);
+  margin-bottom: 1rem;
+}
+
+.gift-card-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 7 – GALERÍA
+═══════════════════════════════════════════════════ */
+.gallery-section {
+  position: relative;
+  background: var(--ivory);
+  padding: 5.5rem 1.5rem;
+  overflow: hidden;
+}
+
+.gallery-bg-garden {
+  position: absolute;
+  inset: 0;
+  background-image: url('/butterfly_garden.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  max-width: 950px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-item {
+  border-radius: 18px;
+  aspect-ratio: 1;
+  box-shadow: 0 4px 20px rgba(183, 110, 121, 0.12);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.1);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(183, 110, 121, 0.25);
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 8 – RSVP
+═══════════════════════════════════════════════════ */
+.rsvp-section {
+  position: relative;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.rsvp-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2d1b2e 0%, #4a1f3a 50%, #3d1a4a 100%);
+  z-index: 0;
+}
+
+.rsvp-section .section-title {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-section .section-label {
+  color: var(--gold-light);
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.65);
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  margin: 0 auto;
+  backdrop-filter: blur(15px);
+  position: relative;
+  z-index: 1;
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.form-group select option {
+  background: #2d1b2e;
+  color: #fff;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 90px;
+}
+
+.rsvp-btn {
+  margin-top: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--rose-gold) 50%, var(--purple-soft) 100%);
+  color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+}
+
+.rsvp-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(139, 92, 246, 0.5);
+}
+
+.rsvp-success {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.rsvp-success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.rsvp-success-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+}
+
+.rsvp-success-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.footer-section {
+  position: relative;
+  background: linear-gradient(160deg, var(--dark) 0%, #3d1a4a 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.footer-butterfly-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/butterfly_garden.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  z-index: 0;
+}
+
+.footer-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  background: linear-gradient(135deg, var(--gold-light), var(--lilac));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-hearts {
+  font-size: 1.6rem;
+  margin: 1rem 0;
+  opacity: 0.55;
+  letter-spacing: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-closing {
+  margin-top: 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Butterfly section divider ─── */
+.butterfly-divider {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: visible;
+  z-index: 5;
+}
+
+.butterfly-divider-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.butterfly-divider-line-left {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--rose-gold-light));
+}
+
+.butterfly-divider-line-right {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--rose-gold-light));
+}
+
+.butterfly-divider-icon {
+  font-size: 1.8rem;
+  animation: floatY 3s ease-in-out infinite;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .program-timeline::before {
+    display: none;
+  }
+
+  .timeline-item {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .timeline-item .timeline-content {
+    text-align: center !important;
+  }
+
+  .countdown-item {
+    padding: 1.25rem 1.5rem;
+    min-width: 75px;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 18vw, 6rem);
+  }
+
+  .message-butterfly-left,
+  .message-butterfly-right {
+    display: none;
+  }
 }

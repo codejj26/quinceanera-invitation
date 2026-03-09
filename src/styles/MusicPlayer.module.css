@@ -1,0 +1,194 @@
+/* ──────────────────────────────────────────────────────────
+   Music Player – Floating pill pinned to bottom-right
+   ────────────────────────────────────────────────────────── */
+
+.musicPlayerContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.musicPlayer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 60px;
+    padding: 0.75rem 1.5rem 0.75rem 0.75rem;
+    box-shadow: 0 8px 32px rgba(183, 110, 121, 0.15);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.musicPlayer:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 40px rgba(183, 110, 121, 0.35),
+        0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Song info ── */
+.songInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.songIcon {
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(135deg, #b76e79, #c9a96e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.songIcon svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.songDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.songTitle {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #5a2c35;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.songArtist {
+    font-size: 0.62rem;
+    color: #9b6b72;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* ── Play / Pause button ── */
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.playButton {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b76e79, #c9a96e);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(183, 110, 121, 0.45);
+}
+
+.playButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(183, 110, 121, 0.55);
+}
+
+.playButton:active {
+    transform: scale(0.95);
+}
+
+.playButton svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* ── Audio visualizer bars ── */
+.visualizerContainer {
+    display: flex;
+    align-items: center;
+    padding-left: 0.25rem;
+}
+
+.audioVisualizer {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 1.25rem;
+}
+
+.bar {
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(to top, #b76e79, #c9a96e);
+    height: 4px;
+    transition: height 0.2s ease;
+}
+
+/* Animate bars when music is playing */
+.playing .bar:nth-child(1) {
+    animation: bounce 0.9s ease-in-out infinite;
+}
+
+.playing .bar:nth-child(2) {
+    animation: bounce 0.7s ease-in-out infinite 0.1s;
+}
+
+.playing .bar:nth-child(3) {
+    animation: bounce 1.1s ease-in-out infinite 0.2s;
+}
+
+.playing .bar:nth-child(4) {
+    animation: bounce 0.8s ease-in-out infinite 0.05s;
+}
+
+.playing .bar:nth-child(5) {
+    animation: bounce 1.0s ease-in-out infinite 0.15s;
+}
+
+.playing .bar:nth-child(6) {
+    animation: bounce 0.75s ease-in-out infinite 0.3s;
+}
+
+.playing .bar:nth-child(7) {
+    animation: bounce 0.95s ease-in-out infinite 0.25s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        height: 4px;
+    }
+
+    50% {
+        height: 18px;
+    }
+}
+
+/* ── Responsive: smaller on very small screens ── */
+@media (max-width: 400px) {
+    .musicPlayerContainer {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .songDetails {
+        display: none;
+    }
+
+    .musicPlayer {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+}
