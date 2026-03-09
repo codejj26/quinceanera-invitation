@@ -107,7 +107,7 @@ export default function Home() {
           <div className="message-butterfly-right" aria-hidden="true">🦋</div>
 
           <p className="message-label">Un mensaje del corazón</p>
-          <p className="message-quote">&ldquo;Hoy comienzo un nuevo capítulo&rdquo;</p>
+          <p className="message-quote">&ldquo;Comienza un nuevo capítulo&rdquo;</p>
 
           <div className="message-butterflies-row" aria-hidden="true">🦋 🦋 🦋</div>
 
@@ -134,7 +134,15 @@ export default function Home() {
 
         <div className="details-grid">
           <div className="detail-card">
-            <div className="detail-icon">📅</div>
+            <div className="detail-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: 'var(--gold)' }}>
+                <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" strokeWidth="2" />
+                <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
+                <text x="12" y="18" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="bold" fontFamily="Montserrat, sans-serif">8</text>
+              </svg>
+            </div>
             <h3 className="detail-card-title">Fecha</h3>
             <p className="detail-card-text">
               <strong>Viernes, 8 de Mayo</strong><br />
