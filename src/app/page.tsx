@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Countdown } from './components/Countdown';
 import { RSVPForm } from './components/RSVPForm';
 import MusicPlayer from './components/MusicPlayer';
@@ -5,16 +6,6 @@ import Calendar from './components/Calendar';
 
 // ── Date of the event ──────────────────────────────────────────────────
 const EVENT_DATE = '2026-05-08T19:00:00';
-
-// ── Timeline ──────────────────────────────────────────────────────────
-const timeline = [
-  { time: '06:00 PM', icon: '🦋', title: 'Recepción de invitados', desc: 'Bienvenida y cocktail de bienvenida' },
-  { time: '07:00 PM', icon: '⛪', title: 'Misa de acción de gracias', desc: 'Iglesia Nuestra Señora del Carmen' },
-  { time: '08:30 PM', icon: '✨', title: 'Llegada de la quinceañera', desc: 'La presentación que esperamos tanto' },
-  { time: '09:00 PM', icon: '🍽️', title: 'Cena y festejo', desc: 'Banquete, brindis y palabras especiales' },
-  { time: '10:30 PM', icon: '💃', title: 'Vals de honor', desc: 'El baile más esperado de la noche' },
-  { time: '11:00 PM', icon: '🎶', title: 'Fiesta y música', desc: 'DJ, baile y momentos únicos' },
-];
 
 // ── Gallery items ──────────────────────────────────────────────────────
 const galleryItems = [
@@ -125,10 +116,10 @@ export default function Home() {
           <div className="message-butterflies-row" aria-hidden="true">🦋 🦋 🦋</div>
 
           <p className="message-body">
-            "Cada momento de mi vida ha sido un regalo invaluable.<br />
+            &ldquo;Cada momento de mi vida ha sido un regalo invaluable.<br />
             Con el corazón lleno de gratitud y emoción, te invito a compartir conmigo<br />
             la noche más mágica de mi vida. Tu presencia hará este momento<br />
-            único e irrepetible."
+            único e irrepetible.&rdquo;
           </p>
 
           <p className="message-signature">Con amor, Julieta ♡</p>
@@ -246,10 +237,13 @@ export default function Home() {
 
         <div className="portrait-outer-frame">
           <div className="portrait-inner-frame">
-            <img
+            <Image
               src="/Julieta-versiculo.jpeg"
               alt="Julieta's Portrait"
               className="portrait-image"
+              width={500}
+              height={700}
+              style={{ objectFit: 'cover' }}
             />
           </div>
           <div className="portrait-gold-corner top-left">🦋</div>
@@ -295,11 +289,14 @@ export default function Home() {
                 animationDelay: `${i * 0.1}s`,
               }}
             >
-              <img
+              <Image
                 src={item.url}
                 alt={item.alt}
                 className="gallery-img"
+                width={300}
+                height={300}
                 loading="lazy"
+                style={{ objectFit: 'cover' }}
               />
             </div>
           ))}
