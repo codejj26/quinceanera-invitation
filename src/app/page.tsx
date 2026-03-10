@@ -185,7 +185,7 @@ export default function Home() {
               <strong>Formal / Etiqueta</strong><br /><br />
             </p>
             <div>
-              <p className="restricted-title">Colores Reservados:</p>
+              <p className="restricted-title">Colores Reservados para la Quinceañera:</p>
               {/* Gama Verde */}
               <div className="gamma-group">
                 <span className="gamma-label">Gama Verde:</span>
