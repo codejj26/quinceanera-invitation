@@ -263,7 +263,7 @@ export default function Home() {
         <div className="gifts-container">
           {/* Tarjeta Única de Regalos */}
           <div className="gift-card single-card">
-            <div className="gift-card-icon">✉️ 🎁</div>
+            <div className="gift-card-icon">✉️</div>
             <h3 className="gift-card-title">Un presente del corazón</h3>
             <p className="gift-card-text">
               Tu compañía es mi regalo más preciado en esta noche de luz.
